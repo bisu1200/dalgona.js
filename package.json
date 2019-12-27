@@ -1,0 +1,21 @@
+{
+  "name": "dalgona.js",
+  "version": "0.1.0",
+  "main": "index.js",
+  "description": "Lightweight DOM manipulation library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bisu1200/dalgona.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bisu1200/dalgona.js/issues"
+  },
+  "keywords": [
+    "dalgona",
+    "javascript",
+    "browser",
+    "library"
+  ],
+  "author": "rhc <bisu1200@naver.com>",
+  "license": "MIT"
+}
