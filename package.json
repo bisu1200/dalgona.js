@@ -1,7 +1,7 @@
 {
   "name": "dalgona.js",
-  "version": "0.2.0",
-  "main": "src/index.js",
+  "version": "0.2.1",
+  "main": "./src/index.js",
   "private": false,
   "description": "Lightweight DOM manipulation library",
   "repository": {
