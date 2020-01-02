@@ -1,31 +1,37 @@
-// dalgona.js 0.1.0
+// dalgona.js 0.2.0
 var $d = function(selector) {
   if(!(this instanceof $d)) {
     return new $d(selector);
   }
 
-  var result = [];
-  var isQuery = selector.match(/\s|>|:/g) !== null;
-
-  if(typeof selector === 'string') {
-    if(isQuery) {
-      result = this._findAllByQuery(selector);
-    } else if(selector.indexOf('#') === 0) {
-      result = this._findAllById(selector);
-    } else if(selector.indexOf('.') === 0) {
-      result = this._findAllByClass(selector);
-    } else {
-      result = this._findAllByTagName(selector);
-    }
-  } else {
-    result = selector;
-  }
-
-  this.nodes = this._setNode(result);
-  return this._returnObj();
+  this.nodes = [];
+  return this.init(selector);
 };
 
 $d.prototype = {
+  init: function(selector) {
+    var result = [];
+    var isQuery = selector.match(/\s|>|:/g) !== null;
+
+    if(typeof selector === 'string') {
+      if(isQuery) {
+        result = this._findAllByQuery(selector);
+      } else if(selector.indexOf('#') === 0) {
+        result = this._findAllById(selector);
+      } else if(selector.indexOf('.') === 0) {
+        result = this._findAllByClass(selector);
+      } else if(selector.indexOf('<') === 0) {
+        result = this._generateNode(selector);
+      } else {
+        result = this._findAllByTagName(selector);
+      }
+    } else {
+      result = selector;
+    }
+
+    this.nodes = this._setNode(result);
+    return this._returnObj();
+  },
   _setNode: function(nodes) {
     var result = [];
 
@@ -84,6 +90,7 @@ $d.prototype = {
   },
   first: require('./util/first'),
   last: require('./util/last'),
+  find: require('./util/find'),
   getDetail: require('./view/getDetail'),
   addClass: require('./class/addClass'),
   removeClass: require('./class/removeClass'),
@@ -101,7 +108,7 @@ $d.prototype = {
   remove: require('./render/remove')
 };
 
-// Export it for webpack
+// NPM, Yarn 등의 패키지 매니저를 이용했을 때
 if(typeof module === 'object' && module.exports) {
   module.exports = $d;
   module.exports.$d = $d;
